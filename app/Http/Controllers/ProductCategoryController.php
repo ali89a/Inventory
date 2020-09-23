@@ -2,43 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\ProductCategory;
 use App\Http\Resources\ProductCategoryResource;
+use App\Model\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
 {
-     private $view_root = 'admin/products/';
+    protected function path(string $suffix)
+    {
+        return "admin.category.{$suffix}";
+    }
 
     public function index()
     {
-        $view = view($this->view_root . 'index');
-        $view->with('business_type_list', ProductCategory::all());
-        return $view;
+        $data = [
+            'categories' => ProductCategory::all(),
+        ];
+        return view($this->path('index'), $data);
 
     }
 
     public function create()
     {
-        $view = view($this->view_root . 'create');
-        return $view;
+        $data = [
+            'model' => new ProductCategory,
+        ];
+
+        return view($this->path('create'), $data);
 
     }
     public function store(Request $request)
     {
-        $productCategory = ProductCategory::create($request->all());
-        return new ProductCategoryResource($productCategory);
+       $request->validate([
+    'name' => 'required|unique:product_categories',
+]);
+
+ProductCategory::create($request->all());
+\Toastr::success('Category Created Successfully!.', '', ["progressbar" => true]);
+return redirect()->route('category.index');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductCategory $productCategory)
+
+    public function show(\App\Model\ProductCategory $productCategory)
     {
-        return new ProductCategoryResource($productCategory);
+    
     }
 
     /**
@@ -47,9 +55,16 @@ class ProductCategoryController extends Controller
      * @param  \App\Model\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductCategory $productCategory)
+    public function edit($productCategory)
     {
-        //
+    //dd( $productCategory);
+       $data = [
+    'model' => ProductCategory::find($productCategory),
+];
+
+return view($this->path('edit'), $data);
+
+
     }
 
     /**
@@ -61,8 +76,17 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $productCategory)
     {
-        $productCategory->update($request->all());
-        return new ProductCategoryResource($productCategory);
+        $productCategory=ProductCategory::find($request->id);
+       $request->validate([
+    'name' => 'required|unique:product_categories,name,' . $productCategory->id,
+]);
+//dd($request->all());
+$productCategory->fill($request->all());
+$productCategory->update();
+\Toastr::success('Category Updated Successfully!.', '', ["progressbar" => true]);
+return redirect()->route('category.index');
+
+
     }
 
     /**

@@ -15,7 +15,8 @@ class PurchaseController extends Controller
     public function index()
     {
         $data = [
-            'model' => new Purchase(),
+            'purchases' => Purchase::all(),
+            
         ];
 
         return view($this->path('index'), $data);
@@ -36,7 +37,29 @@ class PurchaseController extends Controller
 
     public function store(Request $request)
     {
-        //
+     $request->validate([
+    'products' => 'array',
+    'description' => 'nullable',
+]);
+
+// dd( $request->all());
+
+$purchase = new Purchase();
+$purchase->invoice_number="897";
+$purchase->net_amount = "2500";
+$purchase->grand_amount = "2500";
+$purchase->remark = $request->description;
+$purchase->creator_user_id = \Auth::id();
+$purchase->save();
+$products = $request->get('products');
+
+foreach ($products as $row) {
+    $purchase->items()->create($row);
+}
+
+\Toastr::success('Purchase Order Successful!.', '', ["progressbar" => true]);
+return back();
+
     }
     public function show(Purchase $purchase)
     {

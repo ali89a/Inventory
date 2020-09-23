@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Sale;
+use App\Model\Sale;use App\Model\ProductCategory;
+
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -14,7 +15,7 @@ class SaleController extends Controller
     public function index()
     {
         $data = [
-            'model' => new Sale(),
+            'sales' => Sale::all()
         ];
 
         return view($this->path('index'), $data);
@@ -25,7 +26,7 @@ class SaleController extends Controller
     public function create()
     {
         $data = [
-            'model' => new Sale(),
+            'model' => new Sale(),  'categories' => ProductCategory::pluck('name', 'id'),
         ];
 
         return view($this->path('create'), $data);

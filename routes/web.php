@@ -37,15 +37,21 @@ Route::get('lang/{locale}', 'HomeController@lang');
 Route::middleware('auth')->group(function () {
    
 Route::resource('product', 'ProductController');
+Route::get('fetch-product-by-category-id/{id}', 'ProductController@fetch_products_by_cat_id')->name('fetch-product-info');
+Route::get('fetch-product-info/{id}', 'ProductController@fetch_product')->name('fetch-product-info');
 Route::resource('category', 'ProductCategoryController');
-Route::resource('brand', 'ProductBrandController');
+Route::resource('country', 'CountryController');
+Route::resource('unit', 'UnitOfMeasurementController');
+Route::resource('product', 'ProductController');
 Route::resource('purchase', 'PurchaseController');
+Route::resource('stock-in', 'StockInController');
+Route::resource('stock-out', 'StockOutController');
 Route::resource('sale', 'SaleController');
 
 
 });
 
-Route::middleware('auth')->namespace('AccessControl')->group(function () {
+Route::middleware('auth')->namespace('AccessControl')->prefix('access-control')->group(function () {
     Route::resource('user', 'UserController');
     Route::resource('role', 'RoleController');
     Route::resource('permission', 'PermissionController');

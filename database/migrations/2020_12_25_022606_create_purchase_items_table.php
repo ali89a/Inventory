@@ -18,10 +18,11 @@ class CreatePurchaseItemsTable extends Migration
             $table->increments('id');
             $table->Integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->double('unit_price', 15, 2);
+            $table->double('buying_price', 15, 2);
+            $table->double('selling_price', 15, 2);
             $table->double('quantity', 8, 2);
-            $table->double('discount', 8, 2);
-            $table->string('batch_number', 50);
+            $table->double('discount', 8, 2)->nullable();
+            $table->string('batch_number', 50)->nullable();
             $table->date('manufactured_date')->nullable();
             $table->date('expiry_date')->nullable();
             $table->double('net_amount', 15, 2);

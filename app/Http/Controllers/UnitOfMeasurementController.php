@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class UnitOfMeasurementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected function path(string $suffix)
+    {
+        return "admin.unit.{$suffix}";
+    }
     public function index()
     {
-        //
+        $data = [
+            'units' => UnitOfMeasurement::all(),
+        ];
+        return view($this->path('index'), $data);
+
     }
 
     /**
@@ -24,7 +27,12 @@ class UnitOfMeasurementController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'model' => new UnitOfMeasurement,
+        ];
+
+        return view($this->path('create'), $data);
+
     }
 
     /**
@@ -35,7 +43,18 @@ class UnitOfMeasurementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|unique:countries',
+        ]);
+
+        $unit = new UnitOfMeasurement();
+        $unit->name = $request->name;
+        $unit->save();
+
+        \Toastr::success('Unit Created Successfully!.', '', ["progressbar" => true]);
+        return redirect()->route('unit.index');
+
     }
 
     /**

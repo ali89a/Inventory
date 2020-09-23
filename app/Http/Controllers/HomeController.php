@@ -19,7 +19,10 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view('admin.dashboard');
+        $countries = App\Model\Country::all();
+
+   return view('admin.home', compact('countries'));
+
     }
      protected function path(string $suffix){
         return "admin.access_control.permission.{$suffix}";

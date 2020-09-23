@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\Model\Company;
 use App\Model\UnitOfMeasurement;
 use App\Model\User;
-use App\Model\Company;
+use Illuminate\Database\Seeder;
 
 class UnitOfMeasurementsTableSeeder extends Seeder
 {
@@ -14,20 +14,31 @@ class UnitOfMeasurementsTableSeeder extends Seeder
      */
     public function run()
     {
-    	$item = new UnitOfMeasurement;
-    	$item->name = 'Kilogram';
-    	$item->short_name = 'KG';
-    	$item->description = 'Description';
-    	$item->company_id = Company::all()->random()->id;
-    	$item->creator_user_id = User::all()->random()->id;
-    	$item->save();
+        $item = new UnitOfMeasurement;
+        $item->name = '1pcs';
+        $item->short_name = 'KG';
+        $item->description = 'Description';
+        $item->creator_user_id =1;
+		$item->save();
+		
+        $item = new UnitOfMeasurement;
+        $item->name = '2pcs';
+        $item->short_name = 'KG';
+        $item->description = 'Description';
+        $item->creator_user_id = 1;
+		$item->save();
+		
+        $item->name = '3pcs';
+        $item->short_name = 'KG';
+        $item->description = 'Description';
+        $item->creator_user_id = 1;
+		$item->save();
+		
+        $item->name = '1 Set';
+        $item->short_name = 'KG';
+        $item->description = 'Description';
+        $item->creator_user_id = 1;
+        $item->save();
 
-    	$item = new UnitOfMeasurement;
-    	$item->name = 'Litre';
-    	$item->short_name = 'LT';
-    	$item->description = 'Description';
-    	$item->company_id = Company::all()->random()->id;
-    	$item->creator_user_id = User::all()->random()->id;
-    	$item->save();
     }
 }

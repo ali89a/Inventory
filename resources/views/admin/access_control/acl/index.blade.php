@@ -90,7 +90,8 @@
 @endsection
 
 @section('script')
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="{{ asset('vue-js/vue/dist/vue.js') }}"></script>
+    <script src="{{ asset('vue-js/axios/dist/axios.min.js') }}"></script>
     <script>
         $(function(){
 
@@ -99,7 +100,6 @@
                 var role_id=$(this).attr('data-role-id');
                 var permission_id=$(this).attr('data-permission-id');
                 var status=$(this).prop('checked');
-
                 axios({
                     method: 'post',
                     url: "{{ url('access-control/change-role-permission') }}",

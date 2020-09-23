@@ -1,13 +1,28 @@
-@extends('layouts.admin_master')
-@section('style')
-<!-- Font Awesome -->
-<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
-<!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+@extends('admin.layout.master')
+
+@section('css')
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('assets/libs/datatables/datatables.min.css')}}">
+<link rel="stylesheet" href="{{ asset('vue-js/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
+
+    <style>
+        table[class="table dataTable no-footer"]{
+            width: 100%!important;
+        }
+        table thead th:first-child {
+            width: 5%;
+        }
+        table thead th:nth-child(2) {
+            width: 65%;
+        }
+        table thead th:nth-child(3) {
+            width: 20%;
+        }
+      
+        table thead th:last-child{
+            width: 10%;
+        }
+    </style>
 @endsection
 
 @section('title','Permission Lists')
@@ -25,10 +40,10 @@
                         <ol class="breadcrumb m-0">
 
                             <li class="breadcrumb-item">
-                            <button style="margin-right: 9px;" class="btn btn-info pull-right">
+                            {{-- <button style="margin-right: 9px;" class="btn btn-info pull-right">
                                     <a style="color: #ffffff;" href="{{route('permission.create')}}">Add
                                     Permission</a>
-                                </button>
+                                </button> --}}
                             </li>
 
                         </ol>
@@ -46,7 +61,7 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
-                        <table class="display datatable table table-stripped">
+                        <table id="datatable" class="display datatable table table-stripped">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -78,14 +93,16 @@
     </div>
 
 @endsection
+
 @section('script')
-<!-- jQuery -->
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js') }}"></script>
+
+   <!-- Plugins js -->
+    <script src="{{ URL::asset('assets/libs/datatables/datatables.min.js')}}"></script>
+    <!-- Init js-->
+    <script src="{{ URL::asset('assets/js/pages/datatables.init.js')}}"></script>
+    <script src="{{ asset('vue-js/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+
+  
 
 @endsection
+

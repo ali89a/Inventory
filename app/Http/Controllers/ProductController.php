@@ -8,13 +8,17 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    private $view_root = 'admin/products/';
+    protected function path(string $suffix)
+    {
+        return "admin.product.{$suffix}";
+    }
 
     public function index()
     {
-        $view = view($this->view_root . 'index');
-        $view->with('business_type_list', Product::all());
-        return $view;
+        $data = [
+            'products' => Product::all(),
+        ];
+        return view($this->path('index'), $data);
 
     }
 
@@ -23,52 +27,69 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function fetch_product($id)
+    {
+   return Product::with('unit_of_measurement')->findOrFail($id);
+
+
+    }
+    public function fetch_products_by_cat_id($id)
+    {
+
+    
+
+    $products = Product::where(['product_status' => 'active', 'product_category_id' => $id])->get();
+       
+        $data = [
+           
+            'products' => $products,
+        ];
+
+        return $data;
+
+    }
     public function create()
     {
-        $view = view($this->view_root . 'create');
-        return $view;
+        $data = [
+            'model' => new Product,
+              'categories' => \App\Model\ProductCategory::pluck('name', 'id'),
+              'countries' => \App\Model\Country::pluck('name', 'id'),
+              'units' => \App\Model\UnitOfMeasurement::pluck('name', 'id'),
+        ];
+
+        return view($this->path('create'), $data);
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+
+     //   dd($request->all());
         $request->validate([
             'name' => 'required',
-            'short_name' => 'required',
         ]);
-        $business_type = new BusinessType;
-        $business_type->fill($request->input());
-        $business_type->company_id = Auth::user()->company()->id;
-        $business_type->creator_user_id = Auth::id();
-        $business_type->save();
-        Session::put('alert-success', $business_type->name . ' created successfully');
-        return redirect()->route('business-type.index');
+        $pro = new Product();
+
+        $pro->product_category_id = $request->product_category_id;
+        $pro->country_id = $request->country_id;
+        $pro->unit_of_measurement_id = $request->unit_of_measurement_id;
+        $pro->product_status = $request->status;
+        $pro->name = $request->name;
+        $pro->code = '22352';
+        $pro->creator_user_id = \Auth::id();
+
+        $pro->save();
+
+        \Toastr::success('Product Created Successfully!.', '', ["progressbar" => true]);
+        return redirect()->route('product.index');
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(Product $product)
     {
         return new ProductResource($product);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Product $product)
     {
         $view = view($this->view_root . 'edit');
@@ -77,13 +98,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -109,7 +124,7 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function fetch_category_wise_product ($id)
+    public function fetch_category_wise_product($id)
     {
 
         $products = Product::where(['product_category_id' => $id])->get();

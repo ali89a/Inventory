@@ -14,7 +14,8 @@ class CreateSalesTable extends Migration
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id');   
+            $table->string('invoice_number', 20);
             $table->double('net_amount', 15, 2);
             $table->double('discount', 8, 2);
             $table->double('extra_discount', 8, 2);
