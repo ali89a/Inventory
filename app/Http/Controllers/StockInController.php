@@ -3,19 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Model\StockIn;
+use App\Model\Sale;
 use Illuminate\Http\Request;
 
 class StockInController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     protected function path(string $suffix)
+    {
+        return "admin.stock.{$suffix}";
+    }
     public function index()
     {
-        //
+        $data = [
+            'stock_ins' => StockIn::all()
+        ];
+
+        return view($this->path('index'), $data);
+
     }
+    
+   
 
     /**
      * Show the form for creating a new resource.

@@ -11,4 +11,10 @@ class Purchase extends Model
         return $this->hasMany('App\Model\PurchaseItem', 'purchase_id');
 
     }
+     public function stock_items(){
+
+        return $this->hasMany('App\Model\StockIn', 'purchase_id');
+
+    }
+
 }

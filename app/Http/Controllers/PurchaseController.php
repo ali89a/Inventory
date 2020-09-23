@@ -47,17 +47,20 @@ class PurchaseController extends Controller
  //dd( $request->all());
 
 $purchase = new Purchase();
-$purchase->invoice_number= '4444';
+$purchase->invoice_number= \App\Classes\PurchaseNumber::serial_number();
 $purchase->grand_total = $request->grand_total;
 $purchase->date = Carbon::now()->format('Y-m-d'); 
 $purchase->remark = $request->description;
 $purchase->creator_user_id = \Auth::id();
 $purchase->save();
 $products = $request->get('products');
-
 foreach ($products as $row) {
     $purchase->items()->create($row);
 }
+foreach ($products as $row) {
+    $purchase->stock_items()->create($row);
+}
+
 
 \Toastr::success('Purchase Order Successful!.', '', ["progressbar" => true]);
 return back();

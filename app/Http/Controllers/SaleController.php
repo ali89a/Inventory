@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Sale;use App\Model\ProductCategory;
-
-use Illuminate\Http\Request;
+use App\Model\ProductCategory;use App\Model\Sale;
 use Carbon\Carbon;
-
+use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
@@ -17,18 +15,17 @@ class SaleController extends Controller
     public function index()
     {
         $data = [
-            'sales' => Sale::all()
+            'sales' => Sale::all(),
         ];
 
         return view($this->path('index'), $data);
 
     }
 
-    
     public function create()
     {
         $data = [
-            'model' => new Sale(),  'categories' => ProductCategory::pluck('name', 'id'),
+            'model' => new Sale(), 'categories' => ProductCategory::pluck('name', 'id'),
         ];
 
         return view($this->path('create'), $data);
@@ -37,33 +34,39 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-      
-     $request->validate([
-    'products' => 'array',
-    'description' => 'nullable',
-]);
+
+        $request->validate([
+            'products' => 'array',
+            'description' => 'nullable',
+        ]);
+        \DB::beginTransaction();
 
 // dd( $request->all());
 
-$sale = new Sale();
-$sale->invoice_number="897";
-$sale->subtotal =  $request->subtotal;
-$sale->discount =  $request->discount;
-$sale->grandtotal =  $request->grandtotal;
-$sale->receive_amount =  $request->receive_amount;
-$sale->change_amount =  $request->change_amount;
-$sale->date = Carbon::now()->format('Y-m-d'); 
-$sale->remark = $request->remark;
-$sale->creator_user_id = \Auth::id();
-$sale->save();
-$products = $request->get('products');
+        $sale = new Sale();
+        $sale->invoice_number = \App\Classes\SaleNumber::serial_number();
 
-foreach ($products as $row) {
-    $sale->items()->create($row);
-}
+        $sale->subtotal = $request->subtotal;
+        $sale->discount = $request->discount;
+        $sale->grandtotal = $request->grandtotal;
+        $sale->receive_amount = $request->receive_amount;
+        $sale->change_amount = $request->change_amount;
+        $sale->date = Carbon::now()->format('Y-m-d');
+        $sale->remark = $request->remark;
+        $sale->creator_user_id = \Auth::id();
+        $sale->save();
+        $products = $request->get('products');
 
-\Toastr::success('Sale Order Successful!.', '', ["progressbar" => true]);
-return back();
+        foreach ($products as $row) {
+            $sale->items()->create($row);
+        }
+        foreach ($products as $row) {
+            $sale->stock_out_items()->create($row);
+        }
+        \DB::commit();
+
+        \Toastr::success('Sale Order Successful!.', '', ["progressbar" => true]);
+        return back();
     }
 
     public function show(Sale $sale)
@@ -76,13 +79,11 @@ return back();
         //
     }
 
-   
     public function update(Request $request, Sale $sale)
     {
         //
     }
 
-   
     public function destroy(Sale $sale)
     {
         //
