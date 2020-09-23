@@ -128,7 +128,7 @@ Product
                                                                      Total
                                                                   </td>
                                                                   <td>
-                                                                        <input type="text" class="form-control input-sm" v-bind:value="subtotal" readonly>
+                                                                        <input type="text" class="form-control input-sm" name="grand_total" v-bind:value="subtotal" readonly>
                                                              
                                                                   </td>
                                   </tr>

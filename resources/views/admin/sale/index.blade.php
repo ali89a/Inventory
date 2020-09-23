@@ -37,7 +37,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Invoice Number</th>
-                                    <th>Grand Amount</th>
+                                    <th>Subtotal</th>
+                                    <th>discount</th>
+                                    <th>Grand Total</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -47,15 +49,17 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->invoice_number}}</td>
-                                        <td>{{ $row->grand_amount}}</td>
+                                        <td>{{ $row->subtotal}}</td>
+                                        <td>{{ $row->discount}}</td>
+                                        <td>{{ $row->grandtotal}}</td>
                                         <td>{{ \Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</td>
 
                                         <td>
                                             @can('Role Edit')
                                                 <div class="btn-group">
-                                                    <a href="{{ route('purchase.edit', $row->id) }}" class="btn btn-xs btn-primary">
+                                                    <a href="{{ route('purchase.show', $row->id) }}" class="btn btn-xs btn-primary">
                                                         <i class="fa fa-pencil-square-o"></i>
-                                                        Edit
+                                                        Show
                                                     </a>
                                                 </div>
                                             @endcan

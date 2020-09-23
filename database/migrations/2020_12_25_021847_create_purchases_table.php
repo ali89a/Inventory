@@ -15,10 +15,9 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('invoice_number', 20);
+            $table->string('invoice_number');
             $table->date('date');
-            $table->double('net_amount', 15, 2);
-            $table->double('grand_amount', 15, 2);
+            $table->double('grand_total', 15, 2);
             $table->text('remark')->nullable();
             $table->unsignedBigInteger('creator_user_id')->nullable();
             $table->foreign('creator_user_id')->references('id')->on('users')->onDelete('restrict');

@@ -26,7 +26,7 @@ Product
   <div class="container-fluid">
     <div class="row" id="vue_app">
       <div class="col-lg-12 col-md-12">
-        {!! BootForm::open(['model' => $model, 'store' => 'purchase.store','enctype' =>
+        {!! BootForm::open(['model' => $model, 'store' => 'sale.store','enctype' =>
         'multipart/form-data']); !!}
 
 
@@ -74,8 +74,7 @@ Product
                           <tr>
                             <th>Product Name</th>
                             <th>Unit</th>
-                            <th>quantity</th>
-                            <th>Buying Price</th>
+                            <th>Quantity</th>
                             <th>Selling Price</th>
                             <th>Item total</th>
                             <th>Action</th>
@@ -102,12 +101,8 @@ Product
                                 class="form-control input-sm" @change="itemtotal(row)">
                             </td>
                             <td>
-                              <input type="number" v-model="row.price" :name="'products['+index+'][buying_price]'"
+                              <input type="number" v-model="row.price" :name="'products['+index+'][sale_price]'"
                                 class="form-control input-sm" @change="itemtotal(row)">
-                            </td>
-                            <td>
-                              <input type="number" v-model="row.selling_price"
-                                :name="'products['+index+'][selling_price]'" class="form-control input-sm">
                             </td>
                             <td>
                               <input type="text" class="form-control input-sm" v-bind:value="itemtotal(row)" readonly>
@@ -129,28 +124,65 @@ Product
                               SubTotal
                             </td>
                             <td>
-                              <input type="text" class="form-control input-sm" v-bind:value="subtotal" readonly>
+                              <input type="text" name="subtotal" class="form-control input-sm" v-bind:value="subtotal" readonly>
 
                             </td>
                           </tr>
                           <tr>
                             <td colspan="4">
-
+                          
                             </td>
                             <td>
-                              Total
+                              Discount
                             </td>
                             <td>
-                              <input type="text" class="form-control input-sm" v-bind:value="subtotal" readonly>
-
+                              <input type="text" name="discount" class="form-control input-sm" v-model="discount" v-bind:value="discount">
+                          
                             </td>
                           </tr>
+
+                          <tr>
+                            <td colspan="4">
+                          
+                            </td>
+                            <td>
+                              Grand Total
+                            </td>
+                            <td>
+                              <input type="text" name="grandtotal" class="form-control input-sm" v-bind:value="grandtotal" readonly>
+                          
+                            </td>
+                          </tr>
+                          <tr>
+                              <td colspan="4">
+                            
+                              </td>
+                              <td>
+                             Receive Amount
+                              </td>
+                              <td>
+                                <input type="text" name="receive_amount" class="form-control input-sm"v-model="receive_amount"  v-bind:value="receive_amount">
+                            
+                              </td>
+                            </tr>
+                            <tr>
+                              <td colspan="4">
+                            
+                              </td>
+                              <td>
+                                Change Amount
+                              </td>
+                              <td>
+                                <input type="text" class="form-control input-sm" name="change_amount" v-bind:value="change_amount" readonly>
+                            
+                              </td>
+                            </tr>
                           <tfoot>
                       </table>
                     </div>
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" v-if="items.length > 0">
-                    {!! BootForm::textarea('description',null,null,['placeholder'=>'Enter description','rows'=>'2']);
+                    {!! BootForm::textarea('remark',null,null,['placeholder'=>'Enter Remark','rows'=>'2']);
                     !!}
                   </div>
                 </div>
@@ -193,22 +225,31 @@ Product
                       get_product_info_by_category_id_url: "{{ url('fetch-product-by-category-id') }}",
                       get_product_info_url: "{{ url('fetch-product-info') }}",
                     },
-                        category_id:'',
-                        product_id: '',
-                        products: [],
-                        items: [],
-                        quantity: 0,
-                        price: 0,
-                        selling_price: 0,
+                    category_id:'',
+                    product_id: '',
+                    products: [],
+                    items: [],
+                    quantity: 0,
+                    price: 0,
+                    discount: 0,
+                    receive_amount: 0,
+                    selling_price: 0,
                      
                 },
                 computed: {
 
-subtotal:function(){
-    return this.items.reduce((total,item)=>{
-       return total + item.quantity* item.price
-    },0)
-}
+                      subtotal:function(){
+                          return this.items.reduce((total,item)=>{
+                            return total + item.quantity* item.price
+                          },0)
+                      },
+                      grandtotal:function(){
+                          return this.subtotal - this.discount
+                      },
+                      change_amount:function(){
+                          return this.grandtotal - this.receive_amount
+                      },
+                     
                 },
                     methods: {
                 

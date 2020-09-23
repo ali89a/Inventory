@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Model\Purchase;
 use App\Model\ProductCategory;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class PurchaseController extends Controller
 {
@@ -42,12 +44,12 @@ class PurchaseController extends Controller
     'description' => 'nullable',
 ]);
 
-// dd( $request->all());
+ //dd( $request->all());
 
 $purchase = new Purchase();
-$purchase->invoice_number="897";
-$purchase->net_amount = "2500";
-$purchase->grand_amount = "2500";
+$purchase->invoice_number= '4444';
+$purchase->grand_total = $request->grand_total;
+$purchase->date = Carbon::now()->format('Y-m-d'); 
 $purchase->remark = $request->description;
 $purchase->creator_user_id = \Auth::id();
 $purchase->save();

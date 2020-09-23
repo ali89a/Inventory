@@ -48,7 +48,7 @@
 
         }
         aside a:hover{
-            color: #0D5245!important;
+            color: #fff!important;
         }
         .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-green,
         .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-green {
