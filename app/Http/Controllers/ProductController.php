@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Picqer;
 
 use App\Http\Resources\ProductResource;
 use App\Model\Product;
@@ -75,8 +76,22 @@ class ProductController extends Controller
         $pro->unit_of_measurement_id = $request->unit_of_measurement_id;
         $pro->product_status = $request->status;
         $pro->name = $request->name;
-        $pro->code = '22352';
+        $pro->code = \App\Classes\ProductCode::serial_number();
         $pro->creator_user_id = \Auth::id();
+
+$label = \App\Classes\ProductCode::serial_number();
+
+$redColor = [0, 0, 0];
+$barcode_generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+$barcode = $barcode_generator->getBarcode($label, $barcode_generator::TYPE_CODE_128, 3, 50, $redColor);
+$path = storage_path("app/public/barcode/$label.png");
+file_put_contents($path, $barcode);
+//Storage::disk('local')->put($path,  $barcode);
+
+//   $path =$barcode->store('public/attach_documents');
+
+$pro->barcode_path = "barcode/$label.png";
+
 
         $pro->save();
 

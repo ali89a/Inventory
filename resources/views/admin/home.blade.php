@@ -12,13 +12,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-{{--                    <h1 class="m-0 text-dark">Dashboard</h1>--}}
+                   <h1 class="m-0 text-dark">Dashboard</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <span class="m-0 text-dark">Filter &nbsp;</span>
-                        <input style="" type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="green">
-                    </ol>
+                  
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -28,121 +25,76 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
-            <form method="POST" action="{{--{{ route('trainers.store')}}--}}#" class="form form-horizontal" enctype="multipart/form-data">
-                <div class="row">
-
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <select class="form-control select2" id="country_id" name="country_id" required="" >
-                                <option disabled selected hidden>Select one</option>
-                                @foreach($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->country_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="city">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Region">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Training">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-{{--                                <input type="date" class="form-control" name="training_title" id="custom_date"--}}
-{{--                                       placeholder="Custome Date">--}}
-
-                            <p> <input type="text" id="datepicker" placeholder="Date" class="form-control" ></p>
-
-
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <button type="submit" class="btn active-color btn-block">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-secondary">
-                        <div class="inner">
-                            <h3>5201</h3>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>150</h3>
 
-                            <p>Participants</p>
-                        </div>
-                        <div class="icon">
-                            <i style="color: aliceblue;" class="ion ion-person-stalker"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-secondary">
-                        <div class="inner">
-                            <h3>51</h3>
-
-                            <p>Trainers</p>
-                        </div>
-                        <div class="icon">
-                            <i style="color: aliceblue;" class="nav-icon fas fa-user-tie"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-secondary">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>Trainings</p>
-                        </div>
-                        <div class="icon">
-                            <i style="color: aliceblue;" class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-secondary">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Todays Class</p>
-                        </div>
-                        <div class="icon">
-                            <i style="color: aliceblue;" class="fas fa-book-reader"></i>
-                        </div>
-                    </div>
-                </div>
-                <!-- ./col -->
+                <p>Total Sales</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-            <!-- /.row -->
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Total Purchase</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>User Registrations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Unique Visitors</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
             <!-- Main row -->
             <div class="row">
                 <div class="col-md-12">
                     <!-- BAR CHART -->
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Training Wise Participant Status</h3>
+                            <h3 class="card-title">Sales Status</h3>
 
                             <div class="card-tools">
 

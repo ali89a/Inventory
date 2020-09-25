@@ -51,7 +51,34 @@
     </a>
 </li>
    
-
+@if( Gate::check('User List') || Gate::check('Role List'))
+<li class="nav-item has-treeview {{ ( Request::segment(1) == 'access-control' )?'menu-open':''}}">
+    <a href="#" class="nav-link {{ ( Request::segment(1) == 'access-control')?'active-color':''}}">
+<i class="nav-icon fa fa-info-circle" aria-hidden="true"></i>
+        <p>
+            Report
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview" style="margin-left: 15px;">
+        @can('User List')
+        <li class="nav-item">
+            <a href="{{route('user.index')}}" class="nav-link {{ ( Request::segment(2) == 'user' )?'active-color':''}}">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+                <p>Purchase Report</p>
+            </a>
+        </li>
+        @endcan
+        @can('Role List')
+        <li class="nav-item">
+            <a href="{{route('role.index')}}" class="nav-link {{ ( Request::segment(2) == 'role' )?'active-color':''}}">
+             <i class="fa fa-bars" aria-hidden="true"></i> <p>Sales Report</p>
+            </a>
+        </li>
+        @endcan
+    </ul>
+</li>
+@endif
     @if( Gate::check('User List') || Gate::check('Role List'))
         <li class="nav-item has-treeview {{ ( Request::segment(1) == 'access-control' )?'menu-open':''}}">
             <a href="#" class="nav-link {{ ( Request::segment(1) == 'access-control')?'active-color':''}}">

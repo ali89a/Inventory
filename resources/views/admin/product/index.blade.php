@@ -32,11 +32,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>code</th>
+                                    <th>bar code</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -45,6 +47,11 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->name}}</td>
+                                        <td>{{ $row->code}}</td>
+                                        <td>
+                                        
+                                        <img width="240" height="50" src="{{asset(\Storage::url($row->barcode_path))}}" alt="{{ $row->code}}">
+                                        </td>
 
                                         <td>
                                             @can('Role Edit')

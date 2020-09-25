@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
+        "picqer/php-barcode-generator": "^2.0",
         "spatie/laravel-permission": "^3.13",
         "watson/bootstrap-form": "^1.4"
     },

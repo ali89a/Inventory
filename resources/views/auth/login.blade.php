@@ -64,7 +64,7 @@
 </head>
 
 <body
-  style="background: url('{{asset('/')}}asset/admin/flags/bg.jpg');background-size: cover;background-repeat: no-repeat;">
+  style="background: url('{{asset('images/bg.jpg')}}');background-size: cover;background-repeat: no-repeat;">
   {{-- @include('auth.login_nav.login_nav') --}}
 
   <div class="container">
@@ -77,11 +77,14 @@
         </div>
       <br>--}}
     <div class="row">
-      <div class="col-md-5">
-       <h1 class="gradient-text-01 color1">
+      <div class="col-md-7"></div>
+      <div class="col-md-5" style="background-color: #ffffff;
+  border: 1px solid gray;
+  opacity: 0.6; padding:20px;" >
+       <h1 class="gradient-text-01 color1 text-center">
         
           Welcome To Hisabe! </h1>
-        <p>Sign in using your Hisabe account</p>
+        <p class="text-center">Sign in using your Hisabe account</p>
         <br>
         <form method="POST" action="{{ route('login') }}">
           @csrf
@@ -90,7 +93,7 @@
                                  value="{{ old('email') }}" autocomplete="email" required placeholder="Email"
             autofocus>--}}
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-              value="{{ old('email') }}" required autocomplete="email" placeholder="Email" autofocus>
+              value="{{ old('email') }}" required autocomplete="email" placeholder="Enter Your Email" autofocus>
 
             <div class="input-group-append">
               <div class="input-group-text">
@@ -105,7 +108,7 @@
           </div>
           <div class="input-group mb-3">
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-              name="password" required autocomplete="current-password" placeholder="Password">
+              name="password" required autocomplete="current-password" placeholder="Enter Your Password">
 
             {{--                <input id="password" type="password" class="form-control@error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">--}}
             <div class="input-group-append">
