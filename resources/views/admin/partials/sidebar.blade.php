@@ -45,15 +45,15 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{route('sale.index')}}" class="nav-link {{ (Request::segment(1) == 'sale' )?' active-color':''}}">
+    <a href="{{route('sale.create')}}" class="nav-link {{ (Request::segment(1) == 'sale' )?' active-color':''}}">
         <i class="nav-icon fa fa-shopping-basket" aria-hidden="true"></i>
         <p>Sale</p>
     </a>
 </li>
    
 @if( Gate::check('User List') || Gate::check('Role List'))
-<li class="nav-item has-treeview {{ ( Request::segment(1) == 'access-control' )?'menu-open':''}}">
-    <a href="#" class="nav-link {{ ( Request::segment(1) == 'access-control')?'active-color':''}}">
+<li class="nav-item has-treeview {{ ( Request::segment(1) == 'report' )?'menu-open':''}}">
+    <a href="#" class="nav-link {{ ( Request::segment(1) == 'report')?'active-color':''}}">
 <i class="nav-icon fa fa-info-circle" aria-hidden="true"></i>
         <p>
             Report
@@ -63,7 +63,7 @@
     <ul class="nav nav-treeview" style="margin-left: 15px;">
         @can('User List')
         <li class="nav-item">
-            <a href="{{route('user.index')}}" class="nav-link {{ ( Request::segment(2) == 'user' )?'active-color':''}}">
+            <a href="{{route('purchase.report')}}" class="nav-link {{ ( Request::segment(2) == 'purchase' )?'active-color':''}}">
               <i class="fa fa-bars" aria-hidden="true"></i>
                 <p>Purchase Report</p>
             </a>
@@ -71,8 +71,16 @@
         @endcan
         @can('Role List')
         <li class="nav-item">
-            <a href="{{route('role.index')}}" class="nav-link {{ ( Request::segment(2) == 'role' )?'active-color':''}}">
+            <a href="{{route('sale.report')}}" class="nav-link {{ ( Request::segment(2) == 'sale' )?'active-color':''}}">
              <i class="fa fa-bars" aria-hidden="true"></i> <p>Sales Report</p>
+            </a>
+        </li>
+        @endcan
+        @can('Role List')
+        <li class="nav-item">
+            <a href="{{route('profit.report')}}" class="nav-link {{ ( Request::segment(2) == 'profit' )?'active-color':''}}">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+                <p>Profit Report</p>
             </a>
         </li>
         @endcan

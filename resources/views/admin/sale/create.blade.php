@@ -28,12 +28,16 @@ Product
       <div class="col-lg-12 col-md-12">
         {!! BootForm::open(['model' => $model, 'store' => 'sale.store','enctype' =>
         'multipart/form-data']); !!}
-
-
         <div class="card">
+          <div class="card-header">
+            <h3 class="card-title" style="color:#115548;">Sale List</h3>
+            <div class="card-tools">
+              <a href="{{route('sale.index')}}"><button class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"
+                    aria-hidden="true"></i> &nbsp;Sale List</button></a>
+            </div>
+          </div>
           <div class="card-body">
             <div class="card-box">
-              <hr>
               <div id="">
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -65,118 +69,123 @@ Product
                   <br>
                   <br>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" v-if="items.length>0">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                     <hr>
                     <div class="table-responsive">
                       <table class="table table-bordered">
                         <thead>
                           <tr>
+                            <th>#</th>
                             <th>Product Name</th>
                             <th>Unit</th>
+                            <th>Stock</th>
+                            <th>Selling Price</th> 
                             <th>Quantity</th>
-                            <th>Selling Price</th>
                             <th>Item total</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr v-for="(row, index) in items">
-
+                            <td>
+                              <button type="button" class="btn btn-danger" @click="delete_row(row)"><i
+                                  class="fa fa-trash"></i></button>
+                            </td>
                             <td>
                               <input type="hidden" :name="'products['+index+'][product_id]'"
                                 class="form-control input-sm" v-bind:value="row.product_id">
-
-
                               <input type="text" class="form-control input-sm" v-bind:value="row.product_name" readonly>
                             </td>
-
                             <td>
-
                               <input type="text" class="form-control input-sm" v-bind:value="row.unit" readonly>
                             </td>
                             <td>
 
+                              <input type="text" class="form-control input-sm" v-bind:value="row.stock" readonly>
+                            </td>
+                            <td>
+                                <input type="number" v-model="row.price" :name="'products['+index+'][sale_price]'" class="form-control input-sm"
+                                  @change="itemtotal(row)" readonly>
+                              </td>
+                            <td>
                               <input type="number" v-model="row.quantity" :name="'products['+index+'][quantity]'"
                                 class="form-control input-sm" @change="itemtotal(row)">
                             </td>
-                            <td>
-                              <input type="number" v-model="row.price" :name="'products['+index+'][sale_price]'"
-                                class="form-control input-sm" @change="itemtotal(row)">
-                            </td>
+                         
                             <td>
                               <input type="text" class="form-control input-sm" v-bind:value="itemtotal(row)" readonly>
                             </td>
-                            <td>
-                              <button type="button" class="btn btn-danger btn-xs" @click="delete_row(row)"><i
-                                  class="fa fa-trash"></i></button>
-                            </td>
+
                           </tr>
 
                         </tbody>
                         <tfoot>
 
                           <tr>
-                            <td colspan="4">
+                            <td colspan="5">
 
                             </td>
                             <td>
                               SubTotal
                             </td>
                             <td>
-                              <input type="text" name="subtotal" class="form-control input-sm" v-bind:value="subtotal" readonly>
+                              <input type="text" name="subtotal" class="form-control input-sm" v-bind:value="subtotal"
+                                readonly>
 
                             </td>
                           </tr>
                           <tr>
-                            <td colspan="4">
-                          
+                        <td colspan="5">
+
                             </td>
                             <td>
                               Discount
                             </td>
                             <td>
-                              <input type="text" name="discount" class="form-control input-sm" v-model="discount" v-bind:value="discount">
-                          
+                              <input type="text" name="discount" class="form-control input-sm" v-model="discount"
+                                v-bind:value="discount">
+
                             </td>
                           </tr>
 
                           <tr>
-                            <td colspan="4">
-                          
+                           <td colspan="5">
+
                             </td>
                             <td>
                               Grand Total
                             </td>
                             <td>
-                              <input type="text" name="grandtotal" class="form-control input-sm" v-bind:value="grandtotal" readonly>
-                          
+                              <input type="text" name="grandtotal" class="form-control input-sm"
+                                v-bind:value="grandtotal" readonly>
+
                             </td>
                           </tr>
                           <tr>
-                              <td colspan="4">
-                            
-                              </td>
-                              <td>
-                             Receive Amount
-                              </td>
-                              <td>
-                                <input type="text" name="receive_amount" class="form-control input-sm"v-model="receive_amount"  v-bind:value="receive_amount">
-                            
-                              </td>
-                            </tr>
-                            <tr>
-                              <td colspan="4">
-                            
-                              </td>
-                              <td>
-                                Change Amount
-                              </td>
-                              <td>
-                                <input type="text" class="form-control input-sm" name="change_amount" v-bind:value="change_amount" readonly>
-                            
-                              </td>
-                            </tr>
+                         <td colspan="5">
+
+                            </td>
+                            <td>
+                              Receive Amount
+                            </td>
+                            <td>
+                              <input type="text" name="receive_amount" class="form-control input-sm"
+                                v-model="receive_amount" v-bind:value="receive_amount">
+
+                            </td>
+                          </tr>
+                          <tr>
+                          <td colspan="5">
+                            </td>
+                            <td>
+                              Change Amount
+                            </td>
+                            <td>
+                              <input type="text" class="form-control input-sm" name="change_amount"
+                                v-bind:value="change_amount" readonly>
+
+                            </td>
+                          </tr>
                           <tfoot>
                       </table>
                     </div>
@@ -223,7 +232,7 @@ Product
                     config: {
                       
                       get_product_info_by_category_id_url: "{{ url('fetch-product-by-category-id') }}",
-                      get_product_info_url: "{{ url('fetch-product-info') }}",
+                      get_product_info_url: "{{ url('fetch-product-info-for-sale') }}",
                     },
                     category_id:'',
                     product_id: '',
@@ -298,12 +307,14 @@ Product
 
                                     product_details = response.data;
                                     vm.items.push({
-                                        product_id: product_details.id,
-                                        product_name: product_details.name,
-                                        unit: product_details.unit_of_measurement.name,
+                                        product_id: product_details.product_id,
+                                        product_name: product_details.product_name,
+                                        unit: product_details.unit,
+                                        stock: product_details.stock,
+                                        price: product_details.sale_price,
                                         quantity:0,
-                                        price:0,
-                                        selling_price: 0,
+                                       
+  
                                         subtotal:0,
                                     });
 

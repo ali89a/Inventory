@@ -30,8 +30,25 @@ class ProductController extends Controller
      */
     public function fetch_product($id)
     {
+        
    return Product::with('unit_of_measurement')->findOrFail($id);
 
+
+    }
+    public function fetch_product_sale($id)
+    {
+
+       
+        
+        $product=Product::with('unit_of_measurement')->findOrFail($id); 
+        $data=[
+            'product_name'=>  $product->name,
+            'unit'=>  $product->unit_of_measurement->name,
+            'sale_price'=>  $product->selling_price,
+            'product_id'=>  $id,
+            'stock'=> \App\Classes\AvailableProductCalculation::product_id($id),
+        ];
+        return  $data;
 
     }
     public function fetch_products_by_cat_id($id)

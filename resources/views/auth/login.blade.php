@@ -83,8 +83,8 @@
   opacity: 0.6; padding:20px;" >
        <h1 class="gradient-text-01 color1 text-center">
         
-          Welcome To Hisabe! </h1>
-        <p class="text-center">Sign in using your Hisabe account</p>
+          Welcome To Amar Hisab! </h1>
+        <p class="text-center">Sign in using your Amar Hisab account</p>
         <br>
         <form method="POST" action="{{ route('login') }}">
           @csrf

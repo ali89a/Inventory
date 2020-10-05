@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('toastr/toastr.min.css')}}">
     <style>
         .active-color {
-            background-color: #0D5245 !important;
+            background-color: #6a8871 !important;
             color: #fff !important;
         }
 
         .active-color:hover {
-            background-color: #0D5245 !important;
+            background-color: #6a8871 !important;
             color: #fff !important;
 
         }
@@ -52,7 +52,7 @@
         }
         .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-green,
         .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-green {
-            background: #0d5245!important;
+            background: #6a8871!important;
             color: #ffffff!important;
         }
 
@@ -73,7 +73,7 @@
     <a href="index3.html" class="brand-link">
         <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Amar Hisab</span>
     </a>
         <div class="sidebar">
             <nav class="mt-2">

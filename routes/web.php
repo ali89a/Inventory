@@ -39,6 +39,10 @@ Route::middleware('auth')->group(function () {
 Route::resource('product', 'ProductController');
 Route::get('fetch-product-by-category-id/{id}', 'ProductController@fetch_products_by_cat_id')->name('fetch-product-info');
 Route::get('fetch-product-info/{id}', 'ProductController@fetch_product')->name('fetch-product-info');
+Route::get('fetch-product-info-for-sale/{id}', 'ProductController@fetch_product_sale')->name('fetch-product-info-for-sale');
+Route::get('report/purchase', 'ReportController@purchase')->name('purchase.report');
+Route::get('report/profit', 'ReportController@profit')->name('profit.report');
+Route::get('report/sale', 'ReportController@purchase')->name('sale.report');
 Route::resource('category', 'ProductCategoryController');
 Route::resource('country', 'CountryController');
 Route::resource('unit', 'UnitOfMeasurementController');
