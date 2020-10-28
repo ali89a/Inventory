@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->Integer('unit_of_measurement_id')->unsigned();
             $table->foreign('unit_of_measurement_id')->references('id')->on('unit_of_measurements')->onDelete('cascade');
             $table->string('name');
+            $table->text('barcode_path')->nullable();
             $table->string('short_name')->nullable();
             $table->string('code', 50)->unique();
             $table->text('description')->nullable();

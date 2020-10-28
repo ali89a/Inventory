@@ -33,6 +33,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('label.index')}}" class="nav-link {{ (Request::segment(1) == 'label' )?' active-color':''}}">
+       <i class="nav-icon fa fa-barcode" aria-hidden="true"></i>
+        <p>Label</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{route('purchase.index')}}" class="nav-link {{ (Request::segment(1) == 'purchase' )?' active-color':''}}">
         <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
         <p>Purchase</p>
@@ -110,7 +116,7 @@
                     <li class="nav-item">
                         <a href="{{route('role.index')}}"
                            class="nav-link {{ ( Request::segment(2) == 'role' )?'active-color':''}}">
-                            <p>Role Management</p>
+                         <i class="fa fa-list" aria-hidden="true"></i>   <p>&nbsp; Role</p>
                         </a>
                     </li>
                 @endcan

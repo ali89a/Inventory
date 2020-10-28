@@ -26,12 +26,16 @@ User
 
                 <div class="col-12">
                     <!-- Horizontal Form -->
-                    <div class="card card-primary">
-                        <div class="card-header bg-light">
-
-                            <h3 class="" style="color:#0D5245;font-weight: bold;" >Add User</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" style="color:#115548; font-weight: bold;">User create</h3>
                             <div class="card-tools">
-                                <a href="{{route('user.index')}}" ><button class="btn btn-sm active-color"><i class="fa fa-list" aria-hidden="true"></i> &nbsp;See List</button></a>
+                                <a class="btn btn-sm active-color" href="{{route('user.index')}}">&nbsp;User List</a>
+                    
+                                {{--                                        <button class="btn btn-sm active-color" data-toggle="modal"
+                                                            data-target="#exampleModalLong"><i class="fa fa-plus-circle"
+                                                                                               aria-hidden="true"></i> &nbsp;Add User
+                                                    </button>--}}
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -46,7 +50,7 @@ User
                             {{ BootForm::text('email', null, null, ['class'=>'form-control input-sm']) }}
                             {{ BootForm::password('password', null, ['class'=>'form-control input-sm']) }}
                             {{ BootForm::password('password_confirmation', null, ['class'=>'form-control input-sm']) }}
-                            {{ BootForm::select('roles[]', 'Roles', $roles, $selected_roles ?? '', ['class'=>'form-control input-sm select2','multiple'=>'multiple','data-placeholder'=>'Select a State'])}}
+                            {{ BootForm::select('roles[]', 'Roles', $roles, $selected_roles ?? '', ['class'=>'form-control input-sm select2','multiple'=>'multiple','data-placeholder'=>'Select a Roles'])}}
                             {{ BootForm::submit('Submit') }}
 
                         </div>

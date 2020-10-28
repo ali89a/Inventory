@@ -27,12 +27,12 @@
                         <div class="card-header">
                             <h3 class="card-title" style="color:#115548; font-weight: bold;">User List</h3>
                             <div class="card-tools">
-{{--                                <a href="{{route('user.create')}}"></a>--}}
+                 <a class="btn btn-sm active-color" href="{{route('user.create')}}">&nbsp;Add User</a>
 
-                                <button class="btn btn-sm active-color" data-toggle="modal"
+       {{--                                        <button class="btn btn-sm active-color" data-toggle="modal"
                                         data-target="#exampleModalLong"><i class="fa fa-plus-circle"
                                                                            aria-hidden="true"></i> &nbsp;Add User
-                                </button>
+                                </button>--}}
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -56,14 +56,13 @@
                                        <td>{{ $row->email }}</td>
                                         <td>
                                             @if($row->getRoleNames()->isNotEmpty())
-                                                <span class="badge ">
+                                                <span class="badge badge-success">
                                                 {!! $row->getRoleNames()->implode("</span> <span class='badge '>") !!}
                                             </span>
                                             @endif
                                         </td>
                                         <td>
                                             @can('User Edit')
-                                                <center>
                                                     <div class="btn-group">
                                                         {{--   <a href="{{ route('user.edit', $row) }}
                                                                <i class="fa fa-pen"></i> </a>
@@ -71,21 +70,18 @@
                                                                <i class="fa fa-trash"></i> </a>
    --}}
 
-                                                        <a href="{{ route('user.edit', $row->id) }}"> <i
-                                                                class="fa fa-pen" aria-hidden="true"
-                                                                style="color: #0D5245"></i> </a> &nbsp;
-
+                                                      
                                                         <form method="POST"
                                                               action="{{ route('user.destroy',$row->id)}}"
                                                               class="d-inline">
                                                             @csrf
-                                                            @method('delete')
-                                                            <button type="submit " style="border: none;" class="danger">
-                                                                <i
-                                                                    class="fas fa-trash-alt text-danger"></i></button>
+                                                            @method('delete') 
+                                                             <a class="btn btn-info btn-sm" href="{{ route('user.edit', $row->id) }}"><i class="fa fa-pen"></i> Edit</a>
+
+                                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                               <i class="fa fa-trash"></i> Delete</button>
                                                         </form>
                                                     </div>
-                                                </center>
                                             @endcan
                                         </td>
                                     </tr>

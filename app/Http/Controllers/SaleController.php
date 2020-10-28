@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\ProductCategory;use App\Model\Sale;
+use App\Model\ProductCategory;
+use App\Model\Sale;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class SaleController extends Controller
     public function create()
     {
         $data = [
-            'model' => new Sale(), 'categories' => ProductCategory::pluck('name', 'id'),
+            'model' => new Sale(),
+            'categories' => ProductCategory::pluck('name', 'id'),
         ];
 
         return view($this->path('create'), $data);
@@ -66,7 +68,7 @@ class SaleController extends Controller
         \DB::commit();
 
         \Toastr::success('Sale Order Successful!.', '', ["progressbar" => true]);
-        return back();
+        return redirect()->route('sale.index');
     }
 
     public function show(Sale $sale)

@@ -23,7 +23,7 @@ Category
                     <div class="card card-primary">
                         <div class="card-header bg-light">
 
-                            <h3 class="card-title" style="color:#115548;">Add Role</h3>
+                            <h3 class="card-title" style="color:#115548;">Add Category</h3>
                             <div class="card-tools">
                                 <a href="{{route('category.index')}}" ><button class="btn btn-sm btn-primary"><i class="fa fa-list" aria-hidden="true"></i> &nbsp;See List</button></a>
                             </div>

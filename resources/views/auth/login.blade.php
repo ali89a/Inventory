@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Hisabe | Log in</title>
+  <title>Pos | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -83,8 +83,8 @@
   opacity: 0.6; padding:20px;" >
        <h1 class="gradient-text-01 color1 text-center">
         
-          Welcome To Amar Hisab! </h1>
-        <p class="text-center">Sign in using your Amar Hisab account</p>
+          Welcome To Amar Pos! </h1>
+        <p class="text-center">Sign in using your Pos account</p>
         <br>
         <form method="POST" action="{{ route('login') }}">
           @csrf

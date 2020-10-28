@@ -58,6 +58,14 @@ Product
                                 ['placeholder'=>'Enter name','required'=>'required'] ) !!}
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                {!! BootForm::text('selling_price', 'Selling Price', null,
+                                ['placeholder'=>'Enter Selling Price','required'=>'required'] ) !!}
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                  {!! BootForm::text('alert_quantity', 'Alert Quantity', null,
+                                  ['placeholder'=>'Enter Alert Quantity','required'=>'required'] ) !!}
+                                </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
                                 {!! BootForm::select('status', 'Status',['active'=>'Active','inactive'=>'Inactive'],
                                 null,

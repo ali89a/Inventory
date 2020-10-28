@@ -47,7 +47,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->invoice_number}}</td>
-                                        <td>{{ $row->grand_amount}}</td>
+                                        <td>{{ $row->grand_total}}</td>
                                         <td>{{ \Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</td>
 
                                         <td>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Model\Purchase;
 use App\Model\Sale;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -12,19 +12,53 @@ class ReportController extends Controller
     {
         return "admin.report.{$suffix}";
     }
-    public function purchase()
+
+    public function purchase(Request $request)
     {
-        $data = [
-            'purchases' => Purchase::all(),
-        ];
+        $data = Purchase::with('items');
+
+
+        if ($request->from_date) {
+            //  dd($request->all());
+            $start = \Carbon\Carbon::parse($request->from_date)->format('Y-m-d');
+            $end = \Carbon\Carbon::parse($request->to_date)->format('Y-m-d');
+            $products = $data->whereBetween('created_at', [$start . " 00:00:00", $end . " 23:59:59"])->get();
+            $data = [
+                'purchases' => $products,
+            ];
+
+        } else {
+           $data = [
+    'purchases' => Purchase::all(),
+];
+
+
+        }
 
         return view($this->path('purchase'), $data);
+
     }
-    public function sale()
+    public function sale(Request $request)
     {
-        $data = [
-            'sales' => Sale::all(),
-        ];
+        $data = Sale::with('items');
+
+
+        if ($request->from_date) {
+            //  dd($request->all());
+            $start = \Carbon\Carbon::parse($request->from_date)->format('Y-m-d');
+            $end = \Carbon\Carbon::parse($request->to_date)->format('Y-m-d');
+            $products = $data->whereBetween('created_at', [$start . " 00:00:00", $end . " 23:59:59"])->get();
+            $data = [
+                'sales' => $products,
+            ];
+
+        } else {
+           $data = [
+    'sales' => Sale::all(),
+];
+
+
+        }
 
         return view($this->path('sale'), $data);
 
@@ -32,7 +66,7 @@ class ReportController extends Controller
     public function profit()
     {
         $data = [
-            'profit' => '',
+            'profit' =>[],
         ];
 
         return view($this->path('profit'), $data);
